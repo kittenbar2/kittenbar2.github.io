@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="本站提供最新最全的好看的偶像剧推荐与在线观看指南，包含韩剧、台剧、日剧及国产甜宠剧的分类导航、热门榜单及观看渠道汇总。">
+    <meta name="keywords" content="好看的偶像剧,韩剧推荐,台剧大全,国产甜宠剧,在线观看">
+    <title>好看的偶像剧-热门剧集推荐与在线观看指南</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #ff4d6d;
+            --secondary-color: #ffb3c1;
+            --accent-color: #fff0f3;
+            --text-main: #2d3436;
+            --text-light: #636e72;
+            --bg-body: #fdf2f5;
+            --bg-card: #ffffff;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow: 0 4px 20px rgba(255, 77, 109, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            padding: 15px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        .search-btn {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .tags-cloud {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tag {
+            background: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            border: 1px solid #eee;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .tag:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.1);
+        }
+
+        /* Section Titles */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+            padding-top: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 24px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .view-all {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        /* Card Design */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            position: relative;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .card-content {
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .card-meta {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .rating {
+            color: #f1c40f;
+            font-weight: bold;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .card-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .card-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 60px 0;
+            margin-top: 40px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-color);
+        }
+
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-text {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #fff;
+            padding: 40px 0;
+            border-top: 1px solid #eee;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header-inner {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span>星河影剧</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">韩剧</a></li>
+                    <li><a href="#">台剧</a></li>
+                    <li><a href="#">日剧</a></li>
+                    <li><a href="#">国产剧</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="search-btn">搜索剧集</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>寻找你的下一部心动之作</h1>
+            <p>汇集全网高口碑、高热度的好看的偶像剧，无论是浪漫爱情还是青春校园，这里都有你想要的治愈故事。</p>
+            <div class="tags-cloud">
+                <span class="tag">#甜宠恋爱</span>
+                <span class="tag">#职场励志</span>
+                <span class="tag">#古装穿越</span>
+                <span class="tag">#校园青春</span>
+                <span class="tag">#破镜重圆</span>
+                <span class="tag">#高颜值CP</span>
+            </div>
+        </section>
+
+        <!-- Trending Section -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">本周热门推荐</h2>
+                <a href="#" class="view-all">查看完整榜单 &rarr;</a>
+            </div>
+            <div class="grid-container">
+                <!-- Card 1 -->
+                <article class="card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/drama1/400/600" alt="浪漫满屋风格海报">
+                        <span class="card-badge">韩剧</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">夏日微风与初恋</h3>
+                        <div class="card-meta">
+                            <span>2023</span>
+                            <span class="rating">★ 9.2</span>
+                        </div>
+                        <p class="card-desc">在炎热的夏天，两个性格迥异的年轻人因为一场意外住进了同一个屋檐下，从欢喜冤家到相爱相杀，演绎最纯真的爱情。</p>
+                        <a href="#" class="card-btn">立即观看</a>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/drama2/400/600" alt="都市职场风格海报">
+                        <span class="card-badge">国产剧</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">都市职场生存指南</h3>
+                        <div class="card-meta">
+                            <span>2023</span>
+                            <span class="rating">★ 8.8</span>
+                        </div>
+                        <p class="card-desc">讲述了初入职场的实习生如何在前辈的指导下，克服困难，在激烈的职场竞争中找到自我价值，并收获了真挚的爱情。</p>
+                        <a href="#" class="card-btn">立即观看</a>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/drama3/400/600" alt="古代宫廷风格海报">
+                        <span class="card-badge">古装剧</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">凤求凰：盛世华章</h3>
+                        <div class="card-meta">
+                            <span>2022</span>
+                            <span class="rating">★ 9.0</span>
+                        </div>
+                        <p class="card-desc">穿越千年的爱恋，皇室权谋与儿女情长的交织。女主角凭借智慧在后宫中步步为营，却意外与摄政王陷入爱河。</p>
+                        <a href="#" class="card-btn">立即观看</a>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/drama4/400/600" alt="校园青春风格海报">
+                        <span class="card-badge">台剧</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">我们的青春日记</h3>
+                        <div class="card-meta">
+                            <span>2023</span>
+                            <span class="rating">★ 8.5</span>
+                        </div>
+                        <p class="card-desc">高中三年的点点滴滴，从校服到婚纱。那些关于梦想、友谊和初恋的故事，将带你重温最美好的青春时光。</p>
+                        <a href="#" class="card-btn">立即观看</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">分类精选</h2>
+            </div>
+            <div class="grid-container">
+                <article class="card" style="grid-column: span 2;">
+                    <div class="card-image" style="height: 200px; grid-column: 1 / -1;">
+                        <img src="https://picsum.photos/seed/drama5/800/400" alt="韩剧专区">
+                        <span class="card-badge">韩剧</span>
+                    </div>
+                    <div class="card-content" style="padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <h3 class="card-title">韩流文化周</h3>
+                            <p class="card-desc" style="margin-bottom: 0;">探索最新的韩国电视剧，从浪漫爱情到悬疑推理，体验原汁原味的韩式情感表达。</p>
+                        </div>
+                        <a href="#" class="card-btn">进入专区 &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image" style="height: 200px;">
+                        <img src="https://picsum.photos/seed/drama6/400/400" alt="台剧专区">
+                        <span class="card-badge">台剧</span>
+                    </div>
+                    <div class="card-content" style="padding: 15px;">
+                        <h3 class="card-title">台剧风向标</h3>
+                        <p class="card-desc">细腻的叙事风格，独特的都市情感，品味台湾偶像剧的文艺与清新。</p>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image" style="height: 200px;">
+                        <img src="https://picsum.photos/seed/drama7/400/400" alt="日剧专区">
+                        <span class="card-badge">日剧</span>
+                    </div>
+                    <div class="card-content" style="padding: 15px;">
+                        <h3 class="card-title">日式治愈系</h3>
+                        <p class="card-desc">短小精悍的剧情，深刻的人性刻画，日剧带给你的不仅是娱乐，更是思考。</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Features / Why Choose Us -->
+        <section class="features">
+            <div class="section-header" style="padding-top: 0;">
+                <h2 class="section-title">为什么选择我们</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <h3 class="feature-title">实时评分更新</h3>
+                    <p class="feature-text">汇聚全网观众真实评价，第一时间掌握剧集口碑变化。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <h3 class="feature-title">多元分类筛选</h3>
+                    <p class="feature-text">根据题材、地区、年份快速筛选，精准找到你喜欢的类型。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    </div>
+                    <h3 class="feature-title">高清播放体验</h3>
+                    <p class="feature-text">提供多种清晰度选择，流畅稳定的播放环境，不错过精彩瞬间。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">关于我们</a>
+                <a href="#">版权声明</a>
+                <a href="#">免责声明</a>
+                <a href="#">联系方式</a>
+            </div>
+            <p class="copyright">Copyright © 2023 星河影剧. All Rights Reserved. 本站仅提供剧集介绍与资源导航服务.</p>
+        </div>
+    </footer>
+
+</body>
+                  </html>
