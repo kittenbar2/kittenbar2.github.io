@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="粗笨网提供最新最全的粗笨风格漫画、二次元插画及同人创作资源，包含作品展示、作者介绍及社区互动功能。">
+    <meta name="keywords" content="粗笨,粗笨漫画,二次元插画,同人创作,动漫资源">
+    <title>粗笨-二次元粗笨风格漫画与同人创作社区</title>
+    <style>
+        :root {
+            --primary-color: #6a4c93;
+            --secondary-color: #ff6b6b;
+            --bg-color: #f7f9fc;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-sub: #666666;
+            --border-radius: 12px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 布局容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* 头部 */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #8e7ce0);
+            color: white;
+            box-shadow: 0 4px 15px rgba(106, 76, 147, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106, 76, 147, 0.4);
+        }
+
+        /* Hero 区域 */
+        .hero {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            background: linear-gradient(180deg, #fff 0%, var(--bg-color) 100%);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-sub);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .search-bar {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            background: white;
+            border-radius: 30px;
+            padding: 5px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            outline: none;
+            border-radius: 25px;
+        }
+
+        .search-bar button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* 分类导航 */
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+
+        .cat-tag {
+            padding: 8px 16px;
+            background: white;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .cat-tag:hover, .cat-tag.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* 内容网格 */
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
+
+        .section-title h2 {
+            font-size: 24px;
+            color: var(--text-main);
+        }
+
+        .section-title a {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 24px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .card-body {
+            padding: 16px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-meta {
+            font-size: 12px;
+            color: var(--text-sub);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-tag {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* 粗笨风格展示区 */
+        .feature-section {
+            background-color: #fff;
+            padding: var(--spacing-lg) 0;
+            margin-top: var(--spacing-lg);
+            border-top: 1px solid #eee;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .feature-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .feature-text p {
+            color: var(--text-sub);
+            margin-bottom: 30px;
+        }
+
+        .feature-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .check-icon {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .feature-img {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: var(--border-radius);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        /* 作者栏 */
+        .authors {
+            background-color: #fff;
+            padding: var(--spacing-lg) 0;
+        }
+
+        .author-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .author-card {
+            text-align: center;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            object-fit: cover;
+            border: 3px solid #f0f0f0;
+        }
+
+        .author-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .author-role {
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #2d3436;
+            color: #dfe6e9;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-info p {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #b2bec3;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #b2bec3;
+            font-size: 14px;
+        }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #636e72;
+            font-size: 13px;
+            color: #636e72;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-img {
+                height: 300px;
+            }
+
+            .author-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .search-bar button {
+                padding: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <span></span>
+                粗笨
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">连载漫画</a></li>
+                    <li><a href="#">单行本</a></li>
+                    <li><a href="#">插画集</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-outline">登录</button>
+                <button class="btn btn-primary">注册</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>探索粗笨风格的世界</h1>
+                <p>汇聚海量二次元粗笨风格漫画与同人创作，感受独特的艺术魅力与幽默气息。</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="搜索作品、作者或标签...">
+                    <button>搜索</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 分类导航 -->
+        <div class="container">
+            <div class="category-nav">
+                <div class="cat-tag active">全部</div>
+                <div class="cat-tag">搞笑日常</div>
+                <div class="cat-tag">冒险奇幻</div>
+                <div class="cat-tag">恋爱校园</div>
+                <div class="cat-tag">机甲科幻</div>
+                <div class="cat-tag">同人创作</div>
+                <div class="cat-tag">冷门佳作</div>
+            </div>
+        </div>
+
+        <!-- 热门推荐 -->
+        <section class="container">
+            <div class="section-title">
+                <h2>热门推荐</h2>
+                <a href="#">查看更多 &rarr;</a>
+            </div>
+            <div class="grid">
+                <article class="card">
+                    <img src="https://picsum.photos/seed/cuben1/300/400" alt="作品封面" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">笨拙的冒险者</h3>
+                        <div class="card-meta">
+                            <span>更新至 120 话</span>
+                            <span class="card-tag">冒险</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://picsum.photos/seed/cuben2/300/400" alt="作品封面" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">粗笨食堂</h3>
+                        <div class="card-meta">
+                            <span>连载中</span>
+                            <span class="card-tag">美食</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://picsum.photos/seed/cuben3/300/400" alt="作品封面" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">机械之心</h3>
+                        <div class="card-meta">
+                            <span>已完结</span>
+                            <span class="card-tag">机甲</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://picsum.photos/seed/cuben4/300/400" alt="作品封面" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">笨蛋的恋爱物语</h3>
+                        <div class="card-meta">
+                            <span>连载中</span>
+                            <span class="card-tag">恋爱</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://picsum.photos/seed/cuben5/300/400" alt="作品封面" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">森林的守望者</h3>
+                        <div class="card-meta">
+                            <span>连载中</span>
+                            <span class="card-tag">奇幻</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://picsum.photos/seed/cuben6/300/400" alt="作品封面" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">废柴法师</h3>
+                        <div class="card-meta">
+                            <span>更新至 45 话</span>
+                            <span class="card-tag">奇幻</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 特色介绍 -->
+        <section class="feature-section">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-text">
+                        <h2>为什么选择粗笨？</h2>
+                        <p>粗笨风格（Cuben Style）以其独特的造型、夸张的表情和温暖的色彩，为读者带来轻松愉悦的阅读体验。无论是主角的笨拙行动，还是配角的机智吐槽，都能让人会心一笑。</p>
+                        <ul class="feature-list">
+                            <li><span class="check-icon">✓</span> 海量正版授权资源</li>
+                            <li><span class="check-icon">✓</span> 高清流畅的阅读体验</li>
+                            <li><span class="check-icon">✓</span> 活跃的创作者社区</li>
+                            <li><span class="check-icon">✓</span> 每日更新，追番无忧</li>
+                        </ul>
+                        <button class="btn btn-primary">开始阅读</button>
+                    </div>
+                    <div class="feature-img">
+                        <div style="text-align: center;">
+                            <div style="font-size: 80px; margin-bottom: 10px;">🎨</div>
+                            <p>艺术与幽默的碰撞</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 精选作者 -->
+        <section class="authors">
+            <div class="container">
+                <div class="section-title">
+                    <h2>社区热门作者</h2>
+                    <a href="#">查看全部 &rarr;</a>
+                </div>
+                <div class="author-grid">
+                    <div class="author-card">
+                        <img src="https://picsum.photos/seed/user1/150/150" alt="作者头像" class="avatar">
+                        <div class="author-name">阿笨工作室</div>
+                        <div class="author-role">原创作者</div>
+                    </div>
+                    <div class="author-card">
+                        <img src="https://picsum.photos/seed/user2/150/150" alt="作者头像" class="avatar">
+                        <div class="author-name">线条怪</div>
+                        <div class="author-role">插画师</div>
+                    </div>
+                    <div class="author-card">
+                        <img src="https://picsum.photos/seed/user3/150/150" alt="作者头像" class="avatar">
+                        <div class="author-name">Momo酱</div>
+                        <div class="author-role">同人画手</div>
+                    </div>
+                    <div class="author-card">
+                        <img src="https://picsum.photos/seed/user4/150/150" alt="作者头像" class="avatar">
+                        <div class="author-name">老王漫画</div>
+                        <div class="author-role">连载作者</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最新动态 -->
+        <section class="container" style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
+            <div class="section-title">
+                <h2>最新动态</h2>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary-color);">
+                    <h4 style="margin-bottom: 8px;">本周新增 50+ 部作品</h4>
+                    <p style="font-size: 14px; color: #666;">欢迎新加入的创作者们，为社区注入新鲜血液。</p>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid var(--secondary-color);">
+                    <h4 style="margin-bottom: 8px;">“粗笨杯”同人大赛开启</h4>
+                    <p style="font-size: 14px; color: #666;">参与我们的年度创作大赛，赢取丰厚大奖。</p>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid #4cd137;">
+                    <h4 style="margin-bottom: 8px;">移动端阅读优化完成</h4>
+                    <p style="font-size: 14px; color: #666;">全新的阅读界面，支持手势操作，体验更佳。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="logo" style="color: white;">
+                        <span style="background: white;"></span>
+                        粗笨
+                    </div>
+                    <p>致力于为二次元爱好者提供最优质的粗笨风格漫画阅读平台，连接创作者与读者。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>探索</h4>
+                    <ul>
+                        <li><a href="#">排行榜</a></li>
+                        <li><a href="#">分类浏览</a></li>
+                        <li><a href="#">新番推荐</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助</h4>
+                    <ul>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">用户协议</a></li>
+                        <li><a href="#">版权声明</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系</h4>
+                    <ul>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">商务合作</a></li>
+                        <li><a href="#">意见反馈</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 粗笨网 版权所有. 本站为演示页面，非真实网站。
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</body>
+  </html>
